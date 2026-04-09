@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
-import { Oswald, Mulish } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const oswald = Oswald({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-display",
-});
-
-const mulish = Mulish({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-body",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Tony the Tiger Plumbing & Handyman | Sacramento, CA",
@@ -41,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${oswald.variable} ${mulish.variable}`}>
+    <html lang="en">
       <head>
         <script
           type="application/ld+json"
@@ -86,7 +76,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}>{children}</body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

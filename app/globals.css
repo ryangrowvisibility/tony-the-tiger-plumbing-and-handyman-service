@@ -1,73 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  /* Dark theme — tiger brand, bold and memorable, orange on black */
-  --bg: oklch(0.12 0.025 40);
-  --bg-surface: oklch(0.17 0.025 40);
-  --bg-raised: oklch(0.22 0.022 40);
-  --text-primary: oklch(0.96 0.008 40);
-  --text-secondary: oklch(0.70 0.025 40);
-  --text-muted: oklch(0.50 0.018 40);
-  --accent: oklch(0.72 0.22 50);
-  --accent-hover: oklch(0.65 0.24 50);
-  --accent-dim: oklch(0.72 0.22 50 / 0.12);
-  --accent-light: oklch(0.92 0.08 50);
-  --border: oklch(0.28 0.03 40);
-  --border-subtle: oklch(0.20 0.022 40);
-}
-
-@theme inline {
-  --color-background: oklch(0.12 0.025 40);
-  --color-foreground: oklch(0.96 0.008 40);
+  --background: #ffffff;
+  --foreground: #1e293b;
 }
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
-  background: oklch(0.12 0.025 40);
 }
 
 body {
-  background: var(--bg) !important;
-  color: var(--text-primary) !important;
-  font-family: "Mulish", system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.animate-fade-up {
-  animation: fadeUp 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
-.delay-1 { animation-delay: 80ms; }
-.delay-2 { animation-delay: 160ms; }
-.delay-3 { animation-delay: 240ms; }
-.delay-4 { animation-delay: 320ms; }
-.delay-5 { animation-delay: 400ms; }
-.delay-6 { animation-delay: 480ms; }
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-up,
-  .animate-fade-in {
-    animation: none;
-  }
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Inter", Arial, Helvetica, sans-serif;
 }

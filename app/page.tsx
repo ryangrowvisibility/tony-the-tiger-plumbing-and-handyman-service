@@ -1,421 +1,467 @@
-"use client";
+import type { FC } from "react";
 
-function PhoneIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 2.98 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16.92z"/>
-    </svg>
-  );
-}
-
-function StarIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-    </svg>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <polyline points="20 6 9 17 4 12"/>
-    </svg>
-  );
-}
-
-function WrenchIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-    </svg>
-  );
-}
-
-function HomeIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-    </svg>
-  );
-}
-
-function ShieldIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    </svg>
-  );
-}
+const PHONE = "(916) 589-0455";
+const PHONE_HREF = "tel:+19165890455";
 
 const services = [
   {
-    num: "01",
-    title: "Plumbing Repairs",
-    desc: "Leaks, clogs, broken fixtures — Tony handles it all. He calls you with updates throughout the job so you always know what's happening.",
+    title: "Plumbing Repair",
+    desc: "Leaks, fixtures, and water lines — Tony handles both straightforward jobs and unexpected complications with clear communication throughout.",
+    icon: "🔧",
   },
   {
-    num: "02",
-    title: "Sprinkler System Repair",
-    desc: "Broken heads, faulty valves, zone issues. Every head checked, every zone tested — Tony doesn't leave until the system runs right.",
+    title: "Sprinkler Repair",
+    desc: "Broken heads, faulty valves, water pressure issues — full diagnosis and repair of your irrigation and sprinkler systems.",
+    icon: "💧",
   },
   {
-    num: "03",
-    title: "Toilet Repair & Replacement",
-    desc: "Running toilets, cracked bases, full replacements. Fast, clean, and done right the first visit.",
+    title: "Shower Cartridge Rebuild",
+    desc: "Dripping faucets and temperature control problems fixed right. Tony removes and replaces shower cartridge valves to restore proper function.",
+    icon: "🚿",
   },
   {
-    num: "04",
+    title: "Toilet Repair",
+    desc: "Leaking, running, or malfunctioning toilets repaired with quality workmanship and lasting results.",
+    icon: "🪠",
+  },
+  {
     title: "Drain Clearing",
-    desc: "Kitchen, bathroom, utility drains cleared quickly. Tony doesn't leave until water flows freely.",
+    desc: "Blocked drains cleared quickly and thoroughly. Kitchen, bathroom, and household drains — no job too stubborn.",
+    icon: "⬇️",
   },
   {
-    num: "05",
-    title: "Water Heater Service",
-    desc: "Installation, repair, and inspection. Tony checks all connections and pressure settings — thoroughness is the standard.",
-  },
-  {
-    num: "06",
-    title: "General Handyman",
-    desc: "Door repairs, drywall patches, minor electrical, fixture swaps. One call covers more than you think.",
+    title: "Handyman Services",
+    desc: "General home repair and maintenance beyond plumbing. One call covers a broad range of household needs.",
+    icon: "🏠",
   },
 ];
 
 const reviews = [
   {
-    name: "Marcus T.",
-    rating: 5,
-    text: "Tony showed up on time, explained everything clearly, and fixed the problem for less than I expected. Already booked him again.",
+    stars: 5,
+    text: "Tony ran into some unexpected complications but called me with updates every step of the way. He handled everything professionally — very personable, responsible, and very reasonable. I would use him again without hesitation.",
+    author: "Satisfied Sacramento Customer",
   },
   {
-    name: "Sandra R.",
-    rating: 5,
-    text: "Finally a plumber who actually calls you back and tells you what's going on. BBB A+ for a reason — highly recommend.",
+    stars: 5,
+    text: "Fixed our leaking toilet bowls with excellent workmanship. Solid quality and a fair price. Highly recommend.",
+    author: "Local Homeowner",
   },
   {
-    name: "David K.",
-    rating: 5,
-    text: "Tony fixed a sprinkler issue three other guys said would need full replacement. Saved me hundreds. Honest and skilled.",
+    stars: 5,
+    text: "A nice guy who does good quality work at reasonable prices and communicates well — on time every visit. You can count on Tony.",
+    author: "Sacramento Local Guide",
   },
 ];
 
-export default function Home() {
+function StarRating({ count = 5 }: { count?: number }) {
   return (
-    <main style={{ background: "var(--bg)", color: "var(--text-primary)", minHeight: "100dvh" }}>
+    <span className="text-yellow-400 text-lg" aria-label={`${count} stars`}>
+      {"★".repeat(count)}
+    </span>
+  );
+}
 
+const Page: FC = () => {
+  return (
+    <div className="flex flex-col min-h-screen">
       {/* Nav */}
-      <nav
-        style={{ background: "var(--bg-surface)", borderBottom: "1px solid var(--border-subtle)" }}
-        className="sticky top-0 z-50 px-6 py-3 flex items-center justify-between"
-      >
-        <div className="flex items-center gap-3">
-          <div
-            style={{ background: "var(--accent)", fontFamily: "var(--font-display)" }}
-            className="w-9 h-9 rounded flex items-center justify-center font-bold text-xs tracking-widest"
-            aria-hidden="true"
+      <header className="bg-white shadow-sm sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold text-orange-600">🐯</span>
+            <div>
+              <span className="font-bold text-gray-900 text-sm sm:text-base leading-tight block">
+                Tony the Tiger
+              </span>
+              <span className="text-xs text-gray-500 block leading-tight">
+                Plumbing &amp; Handyman
+              </span>
+            </div>
+          </div>
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
+            <a href="#services" className="hover:text-orange-600 transition-colors">Services</a>
+            <a href="#about" className="hover:text-orange-600 transition-colors">About</a>
+            <a href="#reviews" className="hover:text-orange-600 transition-colors">Reviews</a>
+            <a href="#contact" className="hover:text-orange-600 transition-colors">Contact</a>
+          </nav>
+          <a
+            href={PHONE_HREF}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm px-4 py-2 rounded-full transition-colors"
           >
-            <span style={{ color: "oklch(0.12 0.025 40)" }}>TTT</span>
-          </div>
-          <div>
-            <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, letterSpacing: "0.02em" }} className="text-sm leading-tight uppercase">
-              Tony the Tiger Plumbing
-            </div>
-            <div style={{ color: "var(--text-muted)" }} className="text-xs">Sacramento, CA</div>
-          </div>
+            Call Now
+          </a>
         </div>
-        <a
-          href="tel:9165890455"
-          style={{
-            background: "var(--accent)",
-            color: "oklch(0.12 0.025 40)",
-            transition: "background 160ms ease-out, transform 160ms ease-out",
-          }}
-          className="flex items-center gap-2 font-bold px-4 py-2 rounded text-sm active:scale-97"
-          onMouseEnter={e => (e.currentTarget.style.background = "var(--accent-hover)")}
-          onMouseLeave={e => (e.currentTarget.style.background = "var(--accent)")}
-          aria-label="Call Tony the Tiger Plumbing at (916) 589-0455"
-        >
-          <PhoneIcon />
-          (916) 589-0455
-        </a>
-      </nav>
+      </header>
 
-      {/* Hero */}
-      <section className="px-6 pt-20 pb-16 md:pt-28 md:pb-24">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-[1fr_auto] gap-16 items-start">
-          <div>
-            <div
-              className="animate-fade-in inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-8"
-              style={{ background: "var(--accent-dim)", color: "var(--accent)" }}
-            >
-              <StarIcon />
-              5.0 on Yelp · BBB A+ Rated
+      <main className="flex-1">
+        {/* Hero */}
+        <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-20 sm:py-28 px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-400/30 rounded-full px-4 py-1.5 text-orange-300 text-sm font-medium mb-6">
+              <span>⭐ 5-Star Rated on Google &amp; Yelp</span>
             </div>
-
-            <h1
-              className="animate-fade-up delay-1 text-5xl md:text-7xl font-bold leading-none mb-6 uppercase"
-              style={{ fontFamily: "var(--font-display)", letterSpacing: "0.01em" }}
-            >
-              Sacramento&apos;s<br />
-              <span style={{ color: "var(--accent)" }}>most reliable</span><br />
-              plumber.
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+              Sacramento Plumbing &amp;{" "}
+              <span className="text-orange-400">Handyman</span> Done Right
             </h1>
-
-            <p className="animate-fade-up delay-2 text-lg leading-relaxed mb-8 max-w-lg" style={{ color: "var(--text-secondary)" }}>
-              Tony Lopez picks up the phone, shows up on time, and calls you with updates along the way.
-              Honest pricing. No surprises. Done right the first visit.
+            <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-8">
+              Honest pricing. Clear communication. Tony Lopez has been delivering
+              5-star results across Sacramento since 2021 — and he always calls
+              you if something unexpected comes up.
             </p>
-
-            <div className="animate-fade-up delay-3 flex flex-wrap gap-3">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:9165890455"
-                style={{
-                  background: "var(--accent)",
-                  color: "oklch(0.12 0.025 40)",
-                  transition: "background 160ms ease-out, transform 160ms ease-out",
-                }}
-                className="flex items-center gap-2 font-bold px-6 py-3.5 rounded text-base active:scale-97"
-                onMouseEnter={e => (e.currentTarget.style.background = "var(--accent-hover)")}
-                onMouseLeave={e => (e.currentTarget.style.background = "var(--accent)")}
+                href={PHONE_HREF}
+                className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg px-8 py-4 rounded-full transition-colors shadow-lg"
               >
-                <PhoneIcon />
-                Call (916) 589-0455
+                📞 Call {PHONE}
               </a>
               <a
                 href="#services"
-                style={{
-                  border: "1px solid var(--border)",
-                  color: "var(--text-secondary)",
-                  transition: "border-color 160ms ease-out, color 160ms ease-out",
-                }}
-                className="font-semibold px-6 py-3.5 rounded text-base active:scale-97"
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = "var(--accent)";
-                  e.currentTarget.style.color = "var(--accent)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = "var(--border)";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                }}
+                className="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-lg px-8 py-4 rounded-full transition-colors"
               >
-                See services
+                See Our Services
+              </a>
+            </div>
+            <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-blue-200">
+              <span className="flex items-center gap-1">✓ Mon–Fri 8am–5pm</span>
+              <span className="flex items-center gap-1">✓ BBB A+ Rated</span>
+              <span className="flex items-center gap-1">✓ Fair, Upfront Pricing</span>
+              <span className="flex items-center gap-1">✓ On Time, Every Time</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Trust bar */}
+        <section className="bg-orange-50 border-b border-orange-100 py-6 px-4">
+          <div className="max-w-5xl mx-auto flex flex-wrap justify-center gap-8 text-center">
+            <div>
+              <div className="text-3xl font-bold text-orange-600">5.0</div>
+              <div className="text-sm text-gray-600">Google Rating</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-orange-600">5.0</div>
+              <div className="text-sm text-gray-600">Yelp Rating (17 reviews)</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-orange-600">A+</div>
+              <div className="text-sm text-gray-600">BBB Rating</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-orange-600">2021</div>
+              <div className="text-sm text-gray-600">Serving Sacramento</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services */}
+        <section id="services" className="py-20 px-4 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+                Services We Offer
+              </h2>
+              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                From urgent plumbing repairs to general home fixes — Tony handles
+                it all with the same care and professionalism.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {services.map((s) => (
+                <div
+                  key={s.title}
+                  className="bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all"
+                >
+                  <div className="text-4xl mb-3">{s.icon}</div>
+                  <h3 className="font-bold text-gray-900 text-lg mb-2">{s.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-10">
+              <a
+                href={PHONE_HREF}
+                className="bg-orange-600 hover:bg-orange-700 text-white font-bold text-lg px-10 py-4 rounded-full transition-colors inline-block shadow-md"
+              >
+                Call to Schedule: {PHONE}
               </a>
             </div>
           </div>
+        </section>
 
-          {/* Info panel */}
-          <div
-            className="animate-fade-up delay-2 rounded-2xl p-6 w-full md:w-72 shrink-0"
-            style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)" }}
-          >
-            <div className="flex items-center gap-2 mb-5" style={{ color: "var(--accent)" }}>
-              <WrenchIcon />
-              <span className="text-xs font-bold tracking-widest uppercase">Tony Lopez</span>
+        {/* About */}
+        <section id="about" className="py-20 px-4 bg-blue-950 text-white">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-400/30 rounded-full px-4 py-1.5 text-orange-300 text-sm font-medium mb-5">
+                About Tony
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-5">
+                The Guy Who Calls You Back
+              </h2>
+              <p className="text-blue-100 text-lg leading-relaxed mb-5">
+                Tony Lopez founded Tony the Tiger Plumbing and Handyman Service in
+                October 2021 with one guiding principle: treat every customer the
+                way you&apos;d want your family treated.
+              </p>
+              <p className="text-blue-100 leading-relaxed mb-5">
+                What sets Tony apart isn&apos;t just the quality of his work — it&apos;s
+                how he communicates. If he runs into an unexpected issue on your
+                job, he calls you before doing anything else. No surprises on the
+                bill. No guessing what&apos;s happening. Just honest, straightforward
+                service from a guy who takes pride in his craft.
+              </p>
+              <p className="text-blue-100 leading-relaxed mb-8">
+                Serving the Sacramento area with residential plumbing, sprinkler
+                repair, and handyman services — five days a week, with the same
+                reliable professionalism every time.
+              </p>
+              <div className="flex flex-wrap gap-3 text-sm">
+                <span className="bg-white/10 border border-white/20 rounded-full px-4 py-1.5">
+                  🐯 Owner-Operated
+                </span>
+                <span className="bg-white/10 border border-white/20 rounded-full px-4 py-1.5">
+                  ✅ BBB A+ Rated
+                </span>
+                <span className="bg-white/10 border border-white/20 rounded-full px-4 py-1.5">
+                  📞 Always Communicates
+                </span>
+                <span className="bg-white/10 border border-white/20 rounded-full px-4 py-1.5">
+                  💰 Honest Pricing
+                </span>
+              </div>
             </div>
-            <div className="space-y-4">
-              <div>
-                <div className="text-xs mb-1" style={{ color: "var(--text-muted)" }}>Hours</div>
-                <div className="font-semibold">Mon – Fri, 8am – 5pm</div>
-              </div>
-              <div>
-                <div className="text-xs mb-1" style={{ color: "var(--text-muted)" }}>Payment</div>
-                <div className="font-semibold">Cash &amp; Check</div>
-              </div>
-              <div>
-                <div className="text-xs mb-1" style={{ color: "var(--text-muted)" }}>In business since</div>
-                <div className="font-semibold">2021</div>
-              </div>
-            </div>
-            <div
-              className="mt-5 pt-5 flex gap-1 items-center"
-              style={{ borderTop: "1px solid var(--border-subtle)" }}
-            >
-              {[...Array(5)].map((_, i) => (
-                <span key={i} style={{ color: "var(--accent)" }}><StarIcon /></span>
-              ))}
-              <span className="ml-2 text-sm font-semibold">5.0</span>
-              <span className="text-xs ml-1" style={{ color: "var(--text-muted)" }}>(17 Yelp)</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust bar */}
-      <div style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border-subtle)", borderBottom: "1px solid var(--border-subtle)" }}>
-        <div className="max-w-6xl mx-auto px-6 py-5">
-          <div className="flex flex-wrap gap-x-10 gap-y-3">
-            {[
-              "BBB A+ Rated",
-              "5.0 stars on Yelp",
-              "Calls with job updates",
-              "Plumbing + Handyman",
-              "Sacramento & surrounds",
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
-                <div style={{ color: "var(--accent)" }}><CheckIcon /></div>
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* About Tony */}
-      <section className="px-6 py-20 md:py-28">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2
-              className="text-3xl md:text-5xl font-bold leading-tight mb-6 uppercase"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              The plumber who actually<br />
-              <span style={{ color: "var(--accent)" }}>calls you back.</span>
-            </h2>
-            <p className="text-lg leading-relaxed mb-6" style={{ color: "var(--text-secondary)" }}>
-              Tony Lopez built his reputation the old-fashioned way: show up on time, explain the work clearly,
-              and never leave until the job is done right. Since 2021, he&apos;s been Sacramento&apos;s go-to for
-              plumbing and handyman work — and the reviews reflect it.
-            </p>
-            <p className="text-base leading-relaxed" style={{ color: "var(--text-muted)" }}>
-              Tony personally calls customers throughout every job with progress updates. No wondering what&apos;s
-              happening behind the walls — you&apos;ll know every step of the way.
-            </p>
-          </div>
-          <div className="space-y-4">
-            {[
-              { icon: <ShieldIcon />, label: "BBB Accredited", desc: "A+ rating — disputes resolved, business practices verified" },
-              { icon: <StarIcon />, label: "5.0 on Yelp", desc: "17 reviews, all 5 stars — consistent quality across every job type" },
-              { icon: <WrenchIcon />, label: "Plumbing + Handyman", desc: "One call covers both — saves you from scheduling two separate trades" },
-              { icon: <HomeIcon />, label: "Sacramento local", desc: "Based right here — faster response, community-invested service" },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className={`flex gap-4 items-start p-4 rounded-xl animate-fade-up delay-${i + 1}`}
-                style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)" }}
-              >
-                <div style={{ color: "var(--accent)" }} className="mt-0.5 shrink-0">{item.icon}</div>
-                <div>
-                  <div className="font-semibold mb-1">{item.label}</div>
-                  <div className="text-sm" style={{ color: "var(--text-secondary)" }}>{item.desc}</div>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <div className="text-center mb-6">
+                <div className="text-6xl mb-3">🐯</div>
+                <div className="text-2xl font-bold">Tony Lopez</div>
+                <div className="text-blue-300 text-sm mt-1">
+                  Owner & Master Plumber
                 </div>
               </div>
-            ))}
+              <div className="space-y-4 text-sm text-blue-100">
+                <div className="flex items-start gap-3">
+                  <span className="text-orange-400 mt-0.5">✓</span>
+                  <span>Proactively calls customers when unexpected issues arise</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-orange-400 mt-0.5">✓</span>
+                  <span>Consistently on time — customers mention this in nearly every review</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-orange-400 mt-0.5">✓</span>
+                  <span>Reasonable pricing with no hidden fees or surprises</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-orange-400 mt-0.5">✓</span>
+                  <span>5.0 stars across 20+ reviews on Google and Yelp combined</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-orange-400 mt-0.5">✓</span>
+                  <span>Serving Sacramento homes since 2021</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Services */}
-      <section id="services" style={{ background: "var(--bg-surface)" }} className="px-6 py-20 md:py-28">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-14">
-            <h2
-              className="text-3xl md:text-5xl font-bold leading-tight mb-3 uppercase"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              What Tony fixes.
-            </h2>
-            <p style={{ color: "var(--text-secondary)" }} className="text-lg max-w-xl">
-              Plumbing and handyman — Sacramento&apos;s most useful combination. One number, more problems solved.
-            </p>
-          </div>
-
-          <div className="divide-y" style={{ borderTop: "1px solid var(--border-subtle)", borderBottom: "1px solid var(--border-subtle)", borderColor: "var(--border-subtle)" }}>
-            {services.map((s, i) => (
-              <div
-                key={s.num}
-                className={`grid md:grid-cols-[80px_1fr] gap-4 py-6 animate-fade-up delay-${i + 1}`}
-              >
+        {/* Reviews */}
+        <section id="reviews" className="py-20 px-4 bg-gray-50">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+                What Sacramento Homeowners Say
+              </h2>
+              <p className="text-gray-600 text-lg">
+                5.0 stars on Google · 5.0 stars on Yelp · 20+ reviews
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {reviews.map((r, i) => (
                 <div
-                  className="text-4xl font-bold leading-none pt-1 select-none uppercase"
-                  style={{ fontFamily: "var(--font-display)", color: "var(--accent)", opacity: 0.35 }}
-                  aria-hidden="true"
+                  key={i}
+                  className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
                 >
-                  {s.num}
+                  <StarRating count={r.stars} />
+                  <p className="mt-3 text-gray-700 leading-relaxed text-sm">
+                    &ldquo;{r.text}&rdquo;
+                  </p>
+                  <div className="mt-4 text-xs text-gray-400 font-medium">
+                    — {r.author}
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-1">{s.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{s.desc}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Hours + Contact */}
+        <section id="contact" className="py-20 px-4 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+                Get in Touch
+              </h2>
+              <p className="text-gray-600 text-lg">
+                Ready to get the job done? Give Tony a call.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <div className="bg-orange-50 rounded-2xl p-8 border border-orange-100">
+                <h3 className="font-bold text-gray-900 text-lg mb-5">Contact Information</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">📞</span>
+                    <div>
+                      <div className="text-xs text-gray-500 uppercase tracking-wide font-medium">Phone</div>
+                      <a href={PHONE_HREF} className="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
+                        {PHONE}
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">📍</span>
+                    <div>
+                      <div className="text-xs text-gray-500 uppercase tracking-wide font-medium">Location</div>
+                      <div className="text-gray-800">Sacramento, CA</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">🗺️</span>
+                    <div>
+                      <div className="text-xs text-gray-500 uppercase tracking-wide font-medium">Service Area</div>
+                      <div className="text-gray-800">Sacramento, CA &amp; surrounding areas</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <a
+                    href={PHONE_HREF}
+                    className="block w-full text-center bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-full transition-colors"
+                  >
+                    Call {PHONE}
+                  </a>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Reviews */}
-      <section className="px-6 py-20">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-3 uppercase"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              What Sacramento says.
+              <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                <h3 className="font-bold text-gray-900 text-lg mb-5">Business Hours</h3>
+                <div className="space-y-3 text-sm">
+                  {[
+                    { day: "Monday", hours: "8:00 AM – 5:00 PM" },
+                    { day: "Tuesday", hours: "8:00 AM – 5:00 PM" },
+                    { day: "Wednesday", hours: "8:00 AM – 5:00 PM" },
+                    { day: "Thursday", hours: "8:00 AM – 5:00 PM" },
+                    { day: "Friday", hours: "8:00 AM – 5:00 PM" },
+                    { day: "Saturday", hours: "Closed" },
+                    { day: "Sunday", hours: "Closed" },
+                  ].map(({ day, hours }) => (
+                    <div key={day} className="flex justify-between">
+                      <span className="font-medium text-gray-700">{day}</span>
+                      <span className={hours === "Closed" ? "text-gray-400" : "text-gray-800"}>
+                        {hours}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-6 p-3 bg-blue-50 rounded-lg text-sm text-blue-700 border border-blue-100">
+                  💬 Tony always calls ahead if he encounters any complications — no surprise charges, ever.
+                </div>
+              </div>
+            </div>
+
+            {/* Map embed */}
+            <div className="mt-10 max-w-4xl mx-auto rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+              <iframe
+                title="Tony the Tiger Plumbing Sacramento Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3118.7!2d-121.5244!3d38.5816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDM0JzU0LjAiTiAxMjHCsDMxJzI3LjgiVw!5e0!3m2!1sen!2sus!4v1617000000000!5m2!1sen!2sus"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Banner */}
+        <section className="bg-orange-600 py-14 px-4 text-white text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold mb-3">
+              Ready to Get It Fixed?
             </h2>
-            <p style={{ color: "var(--text-secondary)" }}>5.0 average &mdash; 17 reviews on Yelp.</p>
+            <p className="text-orange-100 text-lg mb-8">
+              Tony answers his phone and shows up on time. Call now for a free
+              estimate on your plumbing or handyman project.
+            </p>
+            <a
+              href={PHONE_HREF}
+              className="bg-white text-orange-600 hover:bg-orange-50 font-bold text-xl px-10 py-4 rounded-full transition-colors shadow-lg inline-block"
+            >
+              📞 {PHONE}
+            </a>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {reviews.map((r, i) => (
-              <div
-                key={i}
-                className={`p-6 rounded-xl animate-fade-up delay-${i + 1}`}
-                style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)" }}
-              >
-                <div className="flex gap-0.5 mb-4" style={{ color: "var(--accent)" }}>
-                  {[...Array(r.rating)].map((_, j) => <StarIcon key={j} />)}
-                </div>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--text-secondary)" }}>&ldquo;{r.text}&rdquo;</p>
-                <div className="text-sm font-semibold">{r.name}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section
-        style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border-subtle)" }}
-        className="px-6 py-20"
-      >
-        <div className="max-w-3xl mx-auto text-center">
-          <h2
-            className="text-3xl md:text-5xl font-bold mb-4 uppercase"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Ready to get it <span style={{ color: "var(--accent)" }}>fixed?</span>
-          </h2>
-          <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
-            Monday through Friday, 8am to 5pm. Tony answers, Tony shows up, Tony gets it done.
-          </p>
-          <a
-            href="tel:9165890455"
-            style={{
-              background: "var(--accent)",
-              color: "oklch(0.12 0.025 40)",
-              transition: "background 160ms ease-out, transform 160ms ease-out",
-            }}
-            className="inline-flex items-center gap-3 font-bold px-8 py-4 rounded text-lg active:scale-97"
-            onMouseEnter={e => (e.currentTarget.style.background = "var(--accent-hover)")}
-            onMouseLeave={e => (e.currentTarget.style.background = "var(--accent)")}
-          >
-            <PhoneIcon />
-            Call (916) 589-0455
-          </a>
-          <p className="mt-4 text-sm" style={{ color: "var(--text-muted)" }}>Cash &amp; check accepted · Sacramento, CA 95833</p>
-        </div>
-      </section>
+        </section>
+      </main>
 
       {/* Footer */}
-      <footer style={{ borderTop: "1px solid var(--border-subtle)" }} className="px-6 py-8">
-        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
-          <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, letterSpacing: "0.02em" }} className="text-sm uppercase">
-            Tony the Tiger Plumbing &amp; Handyman
+      <footer className="bg-blue-950 text-blue-200 py-10 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-2xl">🐯</span>
+                <span className="text-white font-bold text-lg">Tony the Tiger</span>
+              </div>
+              <p className="text-sm leading-relaxed">
+                Sacramento&apos;s trusted plumber and handyman. Honest pricing,
+                5-star communication, done right the first time.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-3">Services</h4>
+              <ul className="text-sm space-y-1">
+                <li>Plumbing Repair</li>
+                <li>Sprinkler Repair</li>
+                <li>Shower Cartridge Rebuild</li>
+                <li>Toilet Repair</li>
+                <li>Drain Clearing</li>
+                <li>Handyman Services</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-3">Contact</h4>
+              <div className="text-sm space-y-1">
+                <div>
+                  <a href={PHONE_HREF} className="text-orange-400 hover:text-orange-300">
+                    {PHONE}
+                  </a>
+                </div>
+                <div>Sacramento, CA</div>
+                <div>Mon–Fri: 8:00 AM – 5:00 PM</div>
+                <div className="mt-2">
+                  <a
+                    href="https://nextdoor.com/pages/tony-the-tiger-plumbing-and-handyman-service-sacramento-ca/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-300 hover:text-blue-200 text-xs underline"
+                  >
+                    Find us on Nextdoor
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="text-xs" style={{ color: "var(--text-muted)" }}>
-            Sacramento, CA · (916) 589-0455 · Mon–Fri 8am–5pm
+          <div className="border-t border-blue-800 pt-6 text-center text-xs text-blue-400">
+            © {new Date().getFullYear()} Tony the Tiger Plumbing and Handyman Service · Sacramento, CA · BBB A+ Rated
           </div>
         </div>
       </footer>
-    </main>
+    </div>
   );
-}
+};
+
+export default Page;
